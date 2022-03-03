@@ -3,13 +3,8 @@ import Hashes from "jshashes";
 import Post, {Account} from "../../db.js";
 var router = express.Router();
 
-// default user action endpoint
-router.get("/", function (req, res) {
-    res.send("User Action");
-});
-
 //Creates account data by hashing their email, creating a unique anonymous identifier for them
-router.post("/initializeUser", async (req, res) => {
+router.post("/", async (req, res) => {
     if(req.session.isAuthenticated && req.session.account.username.includes("@uw.edu")) {
         try {
             var SHA256 = new Hashes.SHA256;
@@ -34,8 +29,9 @@ router.post("/initializeUser", async (req, res) => {
     }else {
         //redirect to /
     }
-}) 
+});
 
+<<<<<<< HEAD
 router.get("/account", async (req, res) => {
         let currAccount = req.session.account.username;
         let reqAccount = req.query.account;
@@ -57,4 +53,17 @@ router.get("/account", async (req, res) => {
             res.send({status:"error", error:"permission denied"});
         }
 })
+=======
+// TODO: Updates a user with an action
+router.put("/:accountId", async (req, res) => {
+    const action = req.params.action;
+});
+
+// TODO: Get a user with an ID, or perform an action
+router.get("/:accountId", async (req, res) => {
+    let currAccount = req.session.account.username;
+    let reqAccount = req.query.account;
+});
+
+>>>>>>> e488f67ee49d093d56af97442d5cc880b028e521
 export default router;
