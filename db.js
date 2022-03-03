@@ -5,16 +5,17 @@ dbConnect(() => {return "{status:'success'}"}).catch(err => {return "{status:'er
 var Post;
 export var Course;
 export var Account;
+export var Salt;
 
 async function dbConnect() {
     mongoose.connect("mongodb+srv://ssrubal:Lh2zmcJfHukGBBWi@cluster0.wcu0h.mongodb.net/sns?retryWrites=true&w=majority")
     console.log("Connected to DB");
     const postSchema = new mongoose.Schema({
         courseID: String,
+        title: String,
         content: String,
-        username: String,
-        likes: Number,
-        dislikes: Number,
+        likes: Array,
+        dislikes: Array,
         created_date: Date
     })
     Post = mongoose.model('Post', postSchema);
@@ -23,12 +24,12 @@ async function dbConnect() {
         professor: String,
         description: String,
         numLikes: Number,
-        numDislikes: Number
+        numDislikes: Number,
+        uid: String
     })
     Course = mongoose.model('Course', courseSchema);
     const accountSchema = new mongoose.Schema({
         permissions: String,
-        posts: Array,
         role: String,
         emailHash: String
     })
