@@ -30,12 +30,6 @@ router.post("/:postId", (req, res) => {
     }
 });
 
-// TODO: Creates a new Post
-// Need to interface with front-end to define how body looks like
-router.post("/", (req, res) => {
-    const post = req.body;
-});
-
 // Deletes a post
 router.delete("/:postId", (req, res) => {
     const id = req.params.postId;
@@ -43,7 +37,9 @@ router.delete("/:postId", (req, res) => {
     await post.remove();
 });
 
-router.post("/newPost", async (req, res) => {
+// Creates a new Post
+// Need to interface with front-end to define how body looks like
+router.post("/", async (req, res) => {
     //***code for associating post with user account***
     var SHA256 = new Hashes.SHA256;
     let user = req.session.account.username;
