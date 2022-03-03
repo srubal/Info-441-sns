@@ -3,9 +3,8 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
-import accountRouter from './routes/a/UserActions.js';
-import courseRouter from './routes/c/Course.js';
-import postRouter from './routes/p/Post.js';
+
+import apiRouter from './routes/api/ApiRouter.js';
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -21,7 +20,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', postRouter);
-app.use('/account', accountRouter);
-app.use('/courses', courseRouter);
+// api router
+app.use('/api', apiRouter);
 export default app;
