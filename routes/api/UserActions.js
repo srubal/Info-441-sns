@@ -3,13 +3,13 @@ import Hashes from "jshashes";
 import {Account} from "../../db.js";
 var router = express.Router();
 
-// default user action endpoint
-router.get("/", function (req, res) {
-    res.send("User Action");
+// TODO: Get a user with an ID
+router.get("/:accountId", function (req, res) {
+    const id = req.params.accountId;
 });
 
 //Creates account data by hashing their email, creating a unique anonymous identifier for them
-router.post("/initializeUser", async (req, res) => {
+router.post("/", async (req, res) => {
     if(req.session.isAuthenticated && req.session.account.username.includes("@uw.edu")) {
         var SHA256 = new Hashes.SHA256;
         let accHash = SHA256.hex(req.session.account.username);
@@ -31,14 +31,11 @@ router.post("/initializeUser", async (req, res) => {
     }else {
         //redirect to /
     }
-}) 
+});
 
-router.get("/account", async (req, res) => {
+router.get("/:accountId", async (req, res) => {
         let currAccount = req.session.account.username;
         let reqAccount = req.query.account;
+});
 
-})
-router.post("/addPost", async (req, res) => {
-
-})
 export default router;
