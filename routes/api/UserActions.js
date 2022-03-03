@@ -3,11 +3,6 @@ import Hashes from "jshashes";
 import {Account} from "../../db.js";
 var router = express.Router();
 
-// TODO: Get a user with an ID
-router.get("/:accountId", function (req, res) {
-    const id = req.params.accountId;
-});
-
 //Creates account data by hashing their email, creating a unique anonymous identifier for them
 router.post("/", async (req, res) => {
     if(req.session.isAuthenticated && req.session.account.username.includes("@uw.edu")) {
@@ -33,9 +28,15 @@ router.post("/", async (req, res) => {
     }
 });
 
+// TODO: Updates a user with an action
+router.put("/:accountId", async (req, res) => {
+    const action = req.params.action;
+});
+
+// TODO: Get a user with an ID, or perform an action
 router.get("/:accountId", async (req, res) => {
-        let currAccount = req.session.account.username;
-        let reqAccount = req.query.account;
+    let currAccount = req.session.account.username;
+    let reqAccount = req.query.account;
 });
 
 export default router;
