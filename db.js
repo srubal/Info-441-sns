@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import key from "./db_key.js"
 
 dbConnect(() => {return "{status:'success'}"}).catch(err => {return "{status:'error', error:'" + err + "'}"});
 
@@ -8,7 +9,7 @@ export var Account;
 export var Salt;
 
 async function dbConnect() {
-    mongoose.connect("mongodb+srv://ssrubal:Lh2zmcJfHukGBBWi@cluster0.wcu0h.mongodb.net/sns?retryWrites=true&w=majority")
+    mongoose.connect(key);
     console.log("Connected to DB");
     const postSchema = new mongoose.Schema({
         courseID: String,
