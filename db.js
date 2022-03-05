@@ -17,7 +17,8 @@ async function dbConnect() {
         content: String,
         likes: Array,
         dislikes: Array,
-        created_date: Date
+        created_date: Date,
+        uid: String
     })
     Post = mongoose.model('Post', postSchema);
     const courseSchema = new mongoose.Schema({

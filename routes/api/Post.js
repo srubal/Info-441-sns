@@ -40,24 +40,31 @@ router.delete("/:postId", (req, res) => {
 // Creates a new Post
 // Need to interface with front-end to define how body looks like
 router.post("/", async (req, res) => {
-    //***code for associating post with user account***
-    var SHA256 = new Hashes.SHA256;
-    let user = req.session.account.username;
-    let accountHash = SHA256.hex(user);
-    let acct = await Account.findOne({emailHash: accountHash});
-    let uid = acct._id;
-    let today = new Date();
-    let date = today.getDay() + (today.getMonth() + 1) + today.getFullYear();
-    let post = new Post({
-                        courseID: req.body.courseID,
-                        title: req.body.title,
-                        content: req.body.content,
-                        likes: [],
-                        dislikes: [],
-                        date: date
-    })
-    await post.save();
-    res.send({status: "success"});
+    if(req.session.isAuthenticated) {
+        //***code for associating post with user account***
+        var SHA256 = new Hashes.SHA256;
+        let user = req.session.account.username;
+        let accountHash = SHA256.hex(user);
+        let acct = await Account.findOne({emailHash: accountHash});
+        if(acct && acct.permission != "BANNED") {
+            let uid = acct._id;
+            let today = new Date();
+            let date = today.getDay() + (today.getMonth() + 1) + today.getFullYear();
+            let post = new Post({
+                                courseID: req.body.courseID,
+                                title: req.body.title,
+                                content: req.body.content,
+                                likes: [],
+                                dislikes: [],
+                                date: date,
+                                uid: uid
+            })
+            await post.save();
+            res.send({status: "success"});
+        }else {
+            res.send({status: "error", error: "You have been banned"})
+        }
+    }
 })
 
 export default router;
