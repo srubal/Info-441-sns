@@ -1,11 +1,10 @@
 import express from "express";
-import {Post} from "../../db.js";
 import Hashes from "jshashes";
 import Post, {Account} from "../../db.js";
 var router = express.Router();
 
 // Retrieve a post with an ID
-router.get("/:postId", (req, res) => {
+router.get("/:postId", async (req, res) => {
     // get id from url
     const postId = req.params.postId;
     const post = await Post.findOne({_id: postId});
@@ -14,7 +13,7 @@ router.get("/:postId", (req, res) => {
 });
 
 // Like a post
-router.post("/:postId", (req, res) => {
+router.post("/:postId", async (req, res) => {
     const id = req.params.postId;
     const like = req.query.like;
     const post = await Post.findOne({_id: id});
@@ -31,7 +30,7 @@ router.post("/:postId", (req, res) => {
 });
 
 // Deletes a post
-router.delete("/:postId", (req, res) => {
+router.delete("/:postId", async (req, res) => {
     const id = req.params.postId;
     const post = await Post.findOne({_id: id});
     await post.remove();
@@ -50,10 +49,20 @@ router.post("/", async (req, res) => {
             let uid = acct._id;
             let today = new Date();
             let date = today.getDay() + (today.getMonth() + 1) + today.getFullYear();
+            const escapeHTML = str => str.replace(/[&<>'"]/g, 
+                                        tag => ({
+                                            '&': '&amp;',
+                                            '<': '&lt;',
+                                            '>': '&gt;',
+                                            "'": '&#39;',
+                                            '"': '&quot;'
+                                            }[tag]));
+            let postContent = escapeHTML(req.body.content);
+            let postTitle = escapeHTML(req.body.title);
             let post = new Post({
                                 courseID: req.body.courseID,
-                                title: req.body.title,
-                                content: req.body.content,
+                                title: postTitle,
+                                content: postContent,
                                 likes: [],
                                 dislikes: [],
                                 date: date,

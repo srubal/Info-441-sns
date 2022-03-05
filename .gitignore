@@ -1,3 +1,4 @@
 *node_modules/
 *.vs/
 db_key.js
+auth_key.js
