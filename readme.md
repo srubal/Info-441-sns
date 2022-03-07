@@ -90,7 +90,7 @@ Our target audience is professors, students and UW Administrators. Our audience 
    </td>
   </tr>
   <tr>
-   <td>P3 
+   <td>P3
    </td>
    <td>As a site admin
    </td>
@@ -192,7 +192,7 @@ Our target audience is professors, students and UW Administrators. Our audience 
    </td>
    <td><code>Create user</code>
    </td>
-   <td><code>/a/new</code>
+   <td><code>/a/</code>
    </td>
   </tr>
   <tr>
@@ -200,7 +200,7 @@ Our target audience is professors, students and UW Administrators. Our audience 
    </td>
    <td><code>Update user</code>
    </td>
-   <td><code>/a/{accountID}?action={action}</code>
+   <td><code>/a/act/{accountID}?action={action}</code>
    </td>
   </tr>
   <tr>
@@ -208,7 +208,7 @@ Our target audience is professors, students and UW Administrators. Our audience 
    </td>
    <td><code>Get user information</code>
    </td>
-   <td><code>/a/{accountID}/</code>
+   <td><code>/a/get/{accountID}/</code>
    </td>
   </tr>
 </table>
