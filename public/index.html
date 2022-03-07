@@ -1,40 +1,82 @@
 <html>
+  <head>
+    <title>UW Course Review Forum</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+    <script src="javascripts/index.js"></script>
+  </head>
 
-<head>
-  <title>UW Course Review Forum</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-  <script src="javascripts/index.js"></script>
-</head>
+  <body>
+    <header>
+      <nav>
+        <a role="link" onclick="showPage('home-page', 'all-courses')"> Home </a>
+        <a role="link" onclick="showPage('all-courses', 'home-page')">
+          All Courses
+        </a>
+      </nav>
+      <div id="identity_div">loading...</div>
+    </header>
 
-<body>
-  <header>
-    <nav>
-      <a role="link" onclick="showPage('home-page', 'search-courses')">Home</a>
-      <a role="link" onclick="showPage('search-courses', 'home-page')">Search Courses</a>
-    </nav>
-    <div id="identity_div">loading...</div>
-  </header>
+    <section id="home-page">
+      <form class="post-form">
+        <h2>Create a Post</h2>
+        <input id="create-title" type="text" placeholder="Title" />
+        <input id="create-course" type="text" placeholder="Course Code" />
+        <textarea id="create-post" placeholder="Write your post..."></textarea>
+        <button class="btn post-btn" type="submit" onsubmit="submitInfo()">
+          Post
+        </button>
+      </form>
 
-  <section id="home-page">
-    <form class="post-form">
-      <h2>Create a Post</h2>
-      <input id="create-title" type="text" placeholder="Title">
-      <input id="create-course" type="text" placeholder="Course Code">
-      <textarea id="create-post" placeholder="Write your post..."></textarea>
-      <button class="btn post-btn" type="submit" onsubmit="submitInfo()">Post</button>
-    </form>
+      <h2>Recent Posts</h2>
+      <div id="recent-posts">
+        <div class="default-post">
+          <h3 class="post-title">
+            Post Title <span class="post-course-code">INFO 441</span>
+          </h3>
+          <p class="post-content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+          <em class="post-details"
+            >Posted by Anonymous at 2022-02-22T05:33:57.283Z</em
+          >
+          <hr />
+        </div>
+        <div class="default-post">
+          <h3 class="post-title">
+            Post Title <span class="post-course-code">INFO 441</span>
+          </h3>
+          <p class="post-content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+          <em class="post-details"
+            >Posted by Anonymous at 2022-02-22T05:33:57.283Z</em
+          >
+          <hr />
+        </div>
+      </div>
+    </section>
 
-    <h2>Recent Posts</h2>
-    <div id="recent-posts">
-    </div>
-  </section>
-
-  <section id="search-courses" class="hidden">
-    <h1>This is the search courses page!</h1>
-  </section>
-</body>
-<script src="javascripts/identity.js"></script>
+    <section id="all-courses" class="hidden">
+      <h1>This is the courses page!</h1>
+    </section>
+  </body>
+  <script src="javascripts/identity.js"></script>
 </html>
