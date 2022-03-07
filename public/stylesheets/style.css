@@ -1,8 +1,136 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 16px 'Inter', sans-serif;
+  margin: 60px 100px;
 }
 
 a {
-  color: #00B7FF;
+  color: #008fe2;
+  cursor: pointer;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 4em;
+}
+
+nav {
+  display: flex;
+}
+
+nav a {
+  color: black;
+  font-size: 1em;
+  text-decoration: none;
+  margin-right: 1.6em;
+  transition: all 0.3s;
+}
+
+nav a:hover {
+  color: gray;
+}
+
+.btn {
+  color: white;
+  font-size: 1em;
+  padding: .6em .85em;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.btn-primary {
+  background-color: rgb(0, 115, 223);
+}
+
+.btn-danger {
+  background-color: rgb(187, 25, 25);
+}
+
+h2 {
+  font-size: 1.4em;
+}
+
+.post-form {
+  margin: 2.8em 0;
+  padding: .6em 1.8em 3.2em;
+  border: solid 1px rgb(195, 195, 195);
+  border-radius: 8px;
+  background-color: rgb(233, 233, 233);
+}
+
+.post-form input, .post-form textarea {
+  font-family: 'Inter', sans-serif;
+  display: block;
+  margin: 1em 0;
+  padding: .5em;
+  line-height: 20px;
+  width: 100%;
+  border: 1px solid rgb(160, 160, 160);
+  border-radius: 2px;
+}
+
+.post-form input {
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.post-form textarea {
+  font-size: .9em;
+  height: 100px;
+}
+
+.post-btn {
+  color: white;
+  font-size: 1em;
+  letter-spacing: 1px;
+  padding: .6em 1.2em;
+  border: none;
+  border-radius: 20px;
+  background-color: rgb(0, 115, 223);
+  float: right;
+}
+
+#recent-posts {
+  margin: 2em 0;
+}
+
+#recent-posts h3, #recent-posts p, #recent-posts em {
+  margin: .6em .4em;
+  line-height: 26px;
+}
+
+#recent-posts h3 {
+  line-height: 30px;
+  vertical-align: top;
+}
+
+#recent-posts span {
+  display: inline-block;
+  font-size: .65em;
+  color: white;
+  background-color: #6914d8;
+  margin: .2em .8em;
+  padding: .1em 1em;
+  border-radius: 20px;
+}
+
+#recent-posts em {
+  color: rgb(98, 98, 98);
+  display: block;
+  margin-top: 1.2em;
+}
+
+hr {
+  margin: 1.2em 0;
+}
+
+.hidden {
+  display: none !important;
 }
