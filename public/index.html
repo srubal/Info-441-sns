@@ -17,9 +17,11 @@
     </nav>
     <div id="identity_div">loading...</div>
   </header>
-  <form>
-    <input type="text" placeholder="UserInfo" id="info">
-    <button type="submit" onsubmit="submitInfo()">Click</button>
+  <form class="post-form">
+    <h2>Create a Post</h2>
+    <input type="text" placeholder="Title" id="post-title">
+    <textarea placeholder="Write your post..."></textarea>
+    <button class="btn post-btn" type="submit" onsubmit="submitInfo()">Post</button>
   </form>
 </body>
 <script src="javascripts/identity.js"></script>

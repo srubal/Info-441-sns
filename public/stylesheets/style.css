@@ -1,6 +1,6 @@
 body {
   font: 16px 'Inter', sans-serif;
-  margin: 40px;
+  margin: 60px 100px;
 }
 
 a {
@@ -10,6 +10,8 @@ a {
 header {
   display: flex;
   justify-content: space-between;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 nav {
@@ -19,9 +21,8 @@ nav {
 nav a {
   color: black;
   font-size: 1em;
-  font-weight: 600;
   text-decoration: none;
-  margin-right: 1.5em;
+  margin-right: 1.6em;
   transition: all 0.3s;
 }
 
@@ -48,4 +49,47 @@ nav a:hover {
 
 .btn-danger {
   background-color: rgb(187, 25, 25);
+}
+
+h2 {
+  font-size: 1.3em;
+}
+
+.post-form {
+  margin: 2.5em 0;
+  padding: .8em 1.8em 3.2em;
+  border: solid 1px rgb(195, 195, 195);
+  border-radius: 8px;
+  background-color: rgb(233, 233, 233);
+}
+
+.post-form input, .post-form textarea {
+  font-family: 'Inter', sans-serif;
+  display: block;
+  margin: 1em 0;
+  padding: .4em;
+  width: 100%;
+  border: 1px solid rgb(160, 160, 160);
+  border-radius: 2px;
+}
+
+.post-form input {
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.post-form textarea {
+  font-size: .9em;
+  height: 100px;
+}
+
+.post-btn {
+  color: white;
+  font-size: 1em;
+  letter-spacing: 1px;
+  padding: .6em 1.2em;
+  border: none;
+  border-radius: 20px;
+  background-color: rgb(0, 115, 223);
+  float: right;
 }
