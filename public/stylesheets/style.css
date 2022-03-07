@@ -12,6 +12,7 @@ header {
   justify-content: space-between;
   font-weight: 600;
   letter-spacing: 1px;
+  margin-bottom: 4em;
 }
 
 nav {
@@ -57,7 +58,7 @@ h2 {
 
 .post-form {
   margin: 2.5em 0;
-  padding: .8em 1.8em 3.2em;
+  padding: .6em 1.8em 3.2em;
   border: solid 1px rgb(195, 195, 195);
   border-radius: 8px;
   background-color: rgb(233, 233, 233);
@@ -67,7 +68,8 @@ h2 {
   font-family: 'Inter', sans-serif;
   display: block;
   margin: 1em 0;
-  padding: .4em;
+  padding: .5em;
+  line-height: 20px;
   width: 100%;
   border: 1px solid rgb(160, 160, 160);
   border-radius: 2px;
