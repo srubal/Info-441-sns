@@ -1,8 +1,51 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 16px 'Inter', sans-serif;
+  margin: 40px;
 }
 
 a {
-  color: #00B7FF;
+  color: #008fe2;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav {
+  display: flex;
+}
+
+nav a {
+  color: black;
+  font-size: 1em;
+  font-weight: 600;
+  text-decoration: none;
+  margin-right: 1.5em;
+  transition: all 0.3s;
+}
+
+nav a:hover {
+  color: gray;
+}
+
+.btn {
+  color: white;
+  font-size: 1em;
+  padding: .6em .85em;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.btn-primary {
+  background-color: rgb(0, 115, 223);
+}
+
+.btn-danger {
+  background-color: rgb(187, 25, 25);
 }
