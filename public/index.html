@@ -12,20 +12,29 @@
 <body>
   <header>
     <nav>
-      <a href="/">Home</a>
-      <a href="/">Search Courses</a>
+      <a role="link" onclick="showPage('home-page', 'search-courses')">Home</a>
+      <a role="link" onclick="showPage('search-courses', 'home-page')">Search Courses</a>
     </nav>
     <div id="identity_div">loading...</div>
   </header>
-  <form class="post-form">
-    <h2>Create a Post</h2>
-    <input id="create-title" type="text" placeholder="Title">
-    <input id="create-course" type="text" placeholder="Course Code">
-    <textarea id="create-post" placeholder="Write your post..."></textarea>
-    <button class="btn post-btn" type="submit" onsubmit="submitInfo()">Post</button>
-  </form>
 
-  <h2>Recent Posts</h2>
+  <section id="home-page">
+    <form class="post-form">
+      <h2>Create a Post</h2>
+      <input id="create-title" type="text" placeholder="Title">
+      <input id="create-course" type="text" placeholder="Course Code">
+      <textarea id="create-post" placeholder="Write your post..."></textarea>
+      <button class="btn post-btn" type="submit" onsubmit="submitInfo()">Post</button>
+    </form>
+
+    <h2>Recent Posts</h2>
+    <div id="recent-posts">
+    </div>
+  </section>
+
+  <section id="search-courses" class="hidden">
+    <h1>This is the search courses page!</h1>
+  </section>
 </body>
 <script src="javascripts/identity.js"></script>
 </html>
