@@ -21,11 +21,17 @@ router.post("/:postId", async (req, res) => {
         // todo: add like to post
         post.likes++;
         await post.save();
+        res.send({
+            status: "success",
+        });
     }
     else {
         // todo: dislike post
         post.dislikes++;
         await post.save();
+        res.send({
+                status: "success",
+        });
     }
 });
 
