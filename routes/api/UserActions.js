@@ -33,14 +33,32 @@ router.get("/", async (req, res) => {
         res.redirect('/');
     }
 });
-router.get('/getIdentity', (req, res) => {
-    if(req.session.isAuthenticated) {
+router.get('/getIdentity', async (req, res) => {
+    if(req.session.isAuthenticated && !req.session.account.anonUid) {
+        var SHA256 = new Hashes.SHA256;
+        let accHash = SHA256.hex(req.session.account.username);
+        let acct = await Account.findOne({emailHash: accHash});
+        req.session.account.anonUid = acct._id;
         res.type("json");
-        res.send({status: "loggedin", userInfo: { name: req.session.account.name, username: req.session.account.username}})
+        res.send({status: "loggedin", userInfo: { name: req.session.account.anonUid}})
+    }else if(req.session.isAuthenticated && req.session.account.anonUid){
+        res.type("json");
+        res.send({status: "loggedin", userInfo: { name: req.session.account.anonUid}})
     }else {
         res.type("json");
         res.send(JSON.stringify({status: "loggedout"}))
     }
 })
+
+// router.get('/getMe', async (req, res) => {
+//     if(req.session.isAuthenticated) {
+//         var SHA256 = new Hashes.SHA256;
+//         let accHash = SHA256.hex(req.session.account.username);
+//         let acct = await Account.findOne({emailHash: accHash});
+//         res.redirect('/api/a/get/' + acct._id);
+//     }else {
+//         res.send(JSON.stringify({error: "you shouldn't be here"}));
+//     }
+// })
 
 export default router;

@@ -28,7 +28,7 @@ async function loadIdentity(){
         console.log("2");
         myIdentity = identityInfo.userInfo.username;
         identity_div.innerHTML = `
-        <a href="/userInfo.html?user=${encodeURIComponent(identityInfo.userInfo.username)}">${identityInfo.userInfo.name} (${identityInfo.userInfo.username})</a>
+        <a href="/api/a/get/${identityInfo.userInfo.name}">Logged in anonymously as ${identityInfo.userInfo.name}</a>
         <a href="signout" class="btn btn-danger" role="button">Log out</a>`;
     } else { //loggedout
         console.log("3");
