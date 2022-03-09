@@ -109,6 +109,8 @@ router.post("/", async (req, res) => {
         }else {
             res.send({status: "error", error: "You have been banned"})
         }
+    }else {
+        res.send({status: "error", error: "Please Sign in"});
     }
 })
 
