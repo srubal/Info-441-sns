@@ -24,10 +24,12 @@ router.get("/", async (req, res) => {
                                             emailHash: accHash
                                             });
                 await newAccount.save();
+            }else {
+                req.session.account.anonUid = acct._id;
             }
             res.redirect('/');
         }catch (err) {
-
+            res.send(err);
         }
     }else {
         res.redirect('/');
