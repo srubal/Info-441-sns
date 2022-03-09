@@ -2,14 +2,14 @@ import express from "express";
 var router = express.Router();
 
 // TODO: Retrieve a course with an ID
-router.get("/:courseId", (req, res) => {
+router.get("/:courseId", async (req, res) => {
     const id = req.params.courseId;
     let course = await req.db.User.findById(id)
     res.json(course)
 });
 
 // TODO: Delete a course with an ID
-router.delete("/:courseId", (req, res) => {
+router.delete("/:courseId", async (req, res) => {
     const id = req.params.courseId;
     await req.db.Course.deleteOne({_id: id})
     res.json({status: "success"})
@@ -17,7 +17,7 @@ router.delete("/:courseId", (req, res) => {
 });
 
 // TODO: Create a course
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     const course = req.body;
     let courseId = course.courseId
     let title = course.title
