@@ -1,6 +1,6 @@
 import express from "express";
 import Hashes from "jshashes";
-import Post, {Account} from "../../db.js";
+import {Post, Account} from "../../db.js";
 var router = express.Router();
 
 // Retrieve a post with an ID

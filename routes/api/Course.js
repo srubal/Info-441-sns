@@ -1,11 +1,22 @@
 import express from "express";
+import { Course } from "../../db.js"
 var router = express.Router();
+
+// Retrieve all courses
+router.get("/all", async (req, res) => {
+    try {
+        const courses = await Course.find({});
+        res.json(courses);
+    } catch (err) {
+        res.send({status: "error", message: err.message});
+    }
+});
 
 // Retrieve a course with an ID
 router.get("/:courseId", async (req, res) => {
     const id = req.params.courseId;
     try {
-        let course = await req.db.Course.findById(id)
+        let course = await Course.findById(id)
         res.send(course)
     } catch (error) {
         res.send({ error: error.message })
@@ -16,7 +27,7 @@ router.get("/:courseId", async (req, res) => {
 router.delete("/:courseId", async (req, res) => {
     const id = req.params.courseId;
     try {
-        await req.db.Course.deleteOne({_id: id})
+        await Course.deleteOne({_id: id})
         res.send({status: "success"})
     } catch (error) {
         res.send({status: "error"})
@@ -26,17 +37,10 @@ router.delete("/:courseId", async (req, res) => {
 // Create a course
 router.post("/", async (req, res) => {
     const course = req.body;
-    let courseId = course.courseId
-    let title = course.title
-    let content = course.content
     try {
-        let newCourse = new req.db.Course({
-            courseId: courseId,
-            title: title,
-            content: content
-        })
+        let newCourse = new Course(course);
         await newCourse.save()
-        res.send({status: "success"})
+        res.send({status: "success", course: newCourse})
     } catch (error) {
         res.send({status: "error"})
     }
