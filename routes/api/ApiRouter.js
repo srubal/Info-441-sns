@@ -11,13 +11,6 @@ router.use('/a', actionsRouter);
 router.use('/c', courseRouter);
 router.use('/p', postRouter);
 
-// TODO: Redirect to /all
-// default index endpoint
-router.get("/", function (req, res) {
-    res.send("Index");
-});
-
-// TODO: Add search functionality
 // retrieves recent posts for display on the home screen
 // also handles endpoint for search
 router.get("/all", async (req, res) => {

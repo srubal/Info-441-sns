@@ -65,6 +65,8 @@ router.post("/", async (req, res) => {
     // if the request is a test, don't do authentication
     if (req.body.test) {
         console.log('bypassing authentication for test post')
+        req.body.created_date = new Date();
+        req.body.uid = "testUser";
         const post = new Post(req.body);
         await post.save();
         res.send({
