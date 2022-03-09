@@ -1,5 +1,5 @@
 import express from "express";
-import { Course } from "../../db.js"
+import { Course, Post } from "../../db.js"
 var router = express.Router();
 
 // Retrieve all courses
@@ -11,6 +11,17 @@ router.get("/all", async (req, res) => {
         res.send({status: "error", message: err.message});
     }
 });
+
+router.get('/getPosts', async (req, res) => {
+    let course = req.query.course;
+    try {
+        let posts = await Post.find({courseId: course});
+        res.type("JSON");
+        res.send({posts: posts});
+    }catch (err) {
+        res.send({error: err});
+    }
+})
 
 // Retrieve a course with an ID
 router.get("/:courseId", async (req, res) => {
@@ -45,5 +56,7 @@ router.post("/", async (req, res) => {
         res.send({status: "error"})
     }
 });
+
+
 
 export default router;
