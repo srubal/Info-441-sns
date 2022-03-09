@@ -5,46 +5,76 @@ var router = express.Router();
 
 // Retrieve a post with an ID
 router.get("/:postId", async (req, res) => {
-    // get id from url
-    const postId = req.params.postId;
-    const post = await Post.findOne({_id: postId});
-    res.type('json');
-    res.send(post);
+    try {
+        // get id from url
+        const postId = req.params.postId;
+        const post = await Post.findOne({_id: postId});
+        if (post) {
+            res.json(post);
+        }
+        else {
+            res.send({status: "error", message: "post not found"});
+        }
+    } catch (error) {
+        res.send({error: error.message});
+    }
+    
 });
 
 // Like a post
 router.post("/:postId", async (req, res) => {
-    const id = req.params.postId;
-    const like = req.query.like;
-    const post = await Post.findOne({_id: id});
-    if (like) {
-        // todo: add like to post
-        post.likes++;
-        await post.save();
-        res.send({
-            status: "success",
-        });
-    }
-    else {
-        // todo: dislike post
-        post.dislikes++;
-        await post.save();
-        res.send({
+    try {
+        const id = req.params.postId;
+        const like = req.query.like;
+        const post = await Post.findOne({_id: id});
+        if (like === "true") {
+            // todo: add like to post
+            post.likes++;
+            await post.save();
+            res.send({
                 status: "success",
-        });
+            });
+        }
+        else {
+            // todo: dislike post
+            post.dislikes++;
+            await post.save();
+            res.send({
+                    status: "success",
+            });
+        }
+    } catch (error) {
+        res.send({error: error.message});
     }
 });
 
 // Deletes a post
 router.delete("/:postId", async (req, res) => {
-    const id = req.params.postId;
-    const post = await Post.findOne({_id: id});
-    await post.remove();
+    try {
+        const id = req.params.postId;
+        const post = await Post.findByIdAndRemove({_id: id});
+        res.send({status: "success"});
+    } catch (error) {
+        res.send({ error: error.message });
+    }
 });
 
 // Creates a new Post
 // Need to interface with front-end to define how body looks like
 router.post("/", async (req, res) => {
+    // if the request is a test, don't do authentication
+    if (req.body.test) {
+        console.log('bypassing authentication for test post')
+        const post = new Post(req.body);
+        await post.save();
+        res.send({
+            status: "success",
+            post: post
+        });
+        return
+    }
+
+    // regular post code
     if(req.session.isAuthenticated) {
         //***code for associating post with user account***
         var SHA256 = new Hashes.SHA256;
