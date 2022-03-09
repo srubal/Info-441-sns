@@ -12,7 +12,7 @@ async function dbConnect() {
         content: String,
         likes: Array,
         dislikes: Array,
-        created_date: Date,
+        created_date: String,
         uid: String
     })
     Post = mongoose.model('Post', postSchema);

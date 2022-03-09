@@ -54,7 +54,7 @@ router.post("/", async (req, res) => {
         if(acct && acct.permission != "BANNED") {
             let uid = acct._id;
             let today = new Date();
-            let date = today.getDay() + (today.getMonth() + 1) + today.getFullYear();
+            let date = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
             const escapeHTML = str => str.replace(/[&<>'"]/g, 
                                         tag => ({
                                             '&': '&amp;',
