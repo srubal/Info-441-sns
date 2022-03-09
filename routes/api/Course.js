@@ -1,36 +1,45 @@
 import express from "express";
 var router = express.Router();
 
-// TODO: Retrieve a course with an ID
+// Retrieve a course with an ID
 router.get("/:courseId", async (req, res) => {
     const id = req.params.courseId;
-    let course = await req.db.User.findById(id)
-    res.json(course)
+    try {
+        let course = await req.db.Course.findById(id)
+        res.send(course)
+    } catch (error) {
+        res.send({ error: error.message })
+    }
 });
 
-// TODO: Delete a course with an ID
+// Delete a course with an ID
 router.delete("/:courseId", async (req, res) => {
     const id = req.params.courseId;
-    await req.db.Course.deleteOne({_id: id})
-    res.json({status: "success"})
-    // res.send("Delete course: " + id);
+    try {
+        await req.db.Course.deleteOne({_id: id})
+        res.send({status: "success"})
+    } catch (error) {
+        res.send({status: "error"})
+    }
 });
 
-// TODO: Create a course
+// Create a course
 router.post("/", async (req, res) => {
     const course = req.body;
     let courseId = course.courseId
     let title = course.title
     let content = course.content
-
-    let newCourse = new req.db.Course({
-        courseId: courseId,
-        title: title,
-        content: content
-      })
-
-      await newCourse.save()
-  res.json({status: "success"})
+    try {
+        let newCourse = new req.db.Course({
+            courseId: courseId,
+            title: title,
+            content: content
+        })
+        await newCourse.save()
+        res.send({status: "success"})
+    } catch (error) {
+        res.send({status: "error"})
+    }
 });
 
 export default router;
