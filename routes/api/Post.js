@@ -71,7 +71,7 @@ router.post("/", async (req, res) => {
                                 content: postContent,
                                 likes: [],
                                 dislikes: [],
-                                date: date,
+                                created_date: date,
                                 uid: uid
             })
             await post.save();
