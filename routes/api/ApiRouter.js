@@ -2,7 +2,7 @@ import express from "express";
 import actionsRouter from './UserActions.js';
 import courseRouter from './Course.js';
 import postRouter from './Post.js';
-import Post from "../../db.js";
+import {Post} from "../../db.js";
 
 var router = express.Router();
 
