@@ -1,6 +1,6 @@
 import express from 'express';
 import path from 'path';
-import Post, {Course, Account} from './db.js';
+import {Post, Course, Account} from './db.js';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import appSettings from './auth_key.js';

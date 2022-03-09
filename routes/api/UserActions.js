@@ -3,7 +3,7 @@ import express from "express";
 import Hashes from "jshashes";
 import getRouter from "./getAccount.js";
 import actRouter from "./accountAction.js";
-import Post, {Account} from "../../db.js";
+import {Post, Account} from "../../db.js";
 var router = express.Router();
 
 router.use('/act', actRouter);
