@@ -12,6 +12,23 @@ async function getRecentPosts() {
             }
         });
         const posts = await res.json();
+        let postContainer = document.getElementById("recent-posts");
+
+        let savedPosts = posts.data.map(post => {
+            return `
+                <div class="default-post">
+                    <h3 class="post-title">
+                        ${post.title} <span class="post-course-code">${post.courseID.toUpperCase().replace(" ", "")}</span>
+                    </h3>
+                    <p class="post-content">${post.content}</p>
+                    <em class="post-details">Posted by User ${post.uid} at ${post.date}</em>
+                    <hr />
+                </div>
+            `
+        }).join("\n");
+
+        postContainer.innerHTML = savedPosts;
+
         return posts;
     } catch (error) {
         console.log("Error retrieving recent posts: " + error);
@@ -37,7 +54,7 @@ async function searchPosts(query) {
     }
 }
 
-// Retrieves a post given an ID 
+// Retrieves a post given an ID
 // Returns: a Post object
 async function getPost(id) {
     try {
@@ -93,18 +110,37 @@ async function deletePost(id) {
 // post: {
 //     courseId: Number,
 //     title: String,
-//     content: String,  
+//     content: String,
 // }
-async function createPost(post) {
+async function createPost() {
     try {
+        let courseID = document.getElementById("create-course").value;
+        let postTitle = document.getElementById("create-title").value;
+        let postContent = document.getElementById("create-post").value;
+        const postData = {courseID: courseID, title: postTitle, content: postContent};
         const res = await fetch(endpoint, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(post)
+            body: JSON.stringify(postData)
         });
+
+        let response = await res.json();
+
+        console.log(response);
+
+        if (response.status == "success") {
+            document.getElementById("create-course").value = "";
+            document.getElementById("create-title").value = "";
+            document.getElementById("create-post").value = "";
+
+            await getRecentPosts();
+        } else {
+            alert(response.error);
+        }
     } catch (error) {
+        alert(error);
         console.log("Error creating post: " + error);
         return undefined;
     }

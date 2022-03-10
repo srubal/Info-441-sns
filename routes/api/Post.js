@@ -45,40 +45,46 @@ router.delete("/:postId", async (req, res) => {
 // Creates a new Post
 // Need to interface with front-end to define how body looks like
 router.post("/", async (req, res) => {
-    if(req.session.isAuthenticated) {
-        //***code for associating post with user account***
-        var SHA256 = new Hashes.SHA256;
-        let user = req.session.account.username;
-        let accountHash = SHA256.hex(user);
-        let acct = await Account.findOne({emailHash: accountHash});
-        if(acct && acct.permission != "BANNED") {
-            let uid = acct._id;
-            let today = new Date();
-            let date = today.getDay() + (today.getMonth() + 1) + today.getFullYear();
-            const escapeHTML = str => str.replace(/[&<>'"]/g, 
-                                        tag => ({
-                                            '&': '&amp;',
-                                            '<': '&lt;',
-                                            '>': '&gt;',
-                                            "'": '&#39;',
-                                            '"': '&quot;'
-                                            }[tag]));
-            let postContent = escapeHTML(req.body.content);
-            let postTitle = escapeHTML(req.body.title);
-            let post = new Post({
-                                courseID: req.body.courseID,
-                                title: postTitle,
-                                content: postContent,
-                                likes: [],
-                                dislikes: [],
-                                date: date,
-                                uid: uid
-            })
-            await post.save();
-            res.send({status: "success"});
-        }else {
-            res.send({status: "error", error: "You have been banned"})
+    try {
+        if(req.session.isAuthenticated) {
+            //***code for associating post with user account***
+            var SHA256 = new Hashes.SHA256;
+            let user = req.session.account.username;
+            let accountHash = SHA256.hex(user);
+            let acct = await Account.findOne({emailHash: accountHash});
+            if(acct && acct.permission != "BANNED") {
+                let uid = acct._id;
+                let today = new Date();
+                let date = today.getDay() + (today.getMonth() + 1) + today.getFullYear();
+                const escapeHTML = str => str.replace(/[&<>'"]/g,
+                                            tag => ({
+                                                '&': '&amp;',
+                                                '<': '&lt;',
+                                                '>': '&gt;',
+                                                "'": '&#39;',
+                                                '"': '&quot;'
+                                                }[tag]));
+                let postContent = escapeHTML(req.body.content);
+                let postTitle = escapeHTML(req.body.title);
+                let post = new Post({
+                                    courseID: req.body.courseID,
+                                    title: postTitle,
+                                    content: postContent,
+                                    likes: [],
+                                    dislikes: [],
+                                    date: date,
+                                    uid: uid
+                })
+                await post.save();
+                res.json({status: "success"});
+            } else {
+                res.json({status: "error", error: "You have been banned"})
+            }
+        } else {
+            res.json({status: "error", error: "You need to log in to your account to create a post"})
         }
+    } catch (err) {
+        res.json({error: err});
     }
 })
 

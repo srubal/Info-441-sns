@@ -2,6 +2,7 @@ import express from "express";
 import actionsRouter from './UserActions.js';
 import courseRouter from './Course.js';
 import postRouter from './Post.js';
+import Post from "../../db.js";
 
 var router = express.Router();
 
@@ -19,9 +20,14 @@ router.get("/", function (req, res) {
 // TODO: Add search functionality
 // retrieves recent posts for display on the home screen
 // also handles endpoint for search
-router.get("/all", (req, res) => {
-    const query = req.query.search;
-    res.send("Query: " + query);
+router.get("/all", async (req, res) => {
+    try {
+        const query = req.query.search;
+        let posts = await Post.find();
+        res.json({query: query, data: posts});
+    } catch(err) {
+        res.send(err);
+    }
 });
 
 export default router;
