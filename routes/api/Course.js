@@ -5,7 +5,7 @@ var router = express.Router();
 // Retrieve all courses
 router.get("/all", async (req, res) => {
     try {
-        const courses = await Course.find({});
+        const courses = await Course.find();
         res.json(courses);
     } catch (err) {
         res.send({status: "error", message: err.message});

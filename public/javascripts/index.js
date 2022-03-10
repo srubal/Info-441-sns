@@ -1,5 +1,10 @@
+// function call when page is initialized
 async function init() {
     await getRecentPosts();
+}
+
+function postSubmit() {
+    createPost();
 }
 
 // Allows user to switch between pages on the navbar (Home & All Courses)
