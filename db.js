@@ -3,11 +3,6 @@ import key from "./db_key.js"
 
 dbConnect(() => {return "{status:'success'}"}).catch(err => {return "{status:'error', error:'" + err + "'}"});
 
-var Post;
-export var Course;
-export var Account;
-export var Salt;
-
 async function dbConnect() {
     mongoose.connect(key);
     console.log("Connected to DB");
@@ -17,7 +12,7 @@ async function dbConnect() {
         content: String,
         likes: Array,
         dislikes: Array,
-        created_date: Date,
+        created_date: String,
         uid: String
     })
     Post = mongoose.model('Post', postSchema);
@@ -39,4 +34,7 @@ async function dbConnect() {
     console.log("created db schemas and models");
 }
 
-export default Post;
+export var Course;
+export var Account;
+export var Salt;
+export var Post;

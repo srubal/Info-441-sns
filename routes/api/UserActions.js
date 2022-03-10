@@ -3,7 +3,7 @@ import express from "express";
 import Hashes from "jshashes";
 import getRouter from "./getAccount.js";
 import actRouter from "./accountAction.js";
-import Post, {Account} from "../../db.js";
+import {Post, Account} from "../../db.js";
 var router = express.Router();
 
 router.use('/act', actRouter);
@@ -24,10 +24,12 @@ router.get("/", async (req, res) => {
                                             emailHash: accHash
                                             });
                 await newAccount.save();
+            }else {
+                req.session.account.anonUid = acct._id;
             }
             res.redirect('/');
         }catch (err) {
-
+            res.send(err);
         }
     }else {
         res.redirect('/');

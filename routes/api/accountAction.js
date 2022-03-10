@@ -1,7 +1,7 @@
 import e from "express";
 import express from "express";
 import Hashes from "jshashes";
-import Post, {Account} from "../../db.js";
+import {Post, Account} from "../../db.js";
 import mongoose from "mongoose";
 var router = express.Router();
 

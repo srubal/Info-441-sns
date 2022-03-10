@@ -1,36 +1,62 @@
 import express from "express";
+import { Course, Post } from "../../db.js"
 var router = express.Router();
 
-// TODO: Retrieve a course with an ID
+// Retrieve all courses
+router.get("/all", async (req, res) => {
+    try {
+        const courses = await Course.find({});
+        res.json(courses);
+    } catch (err) {
+        res.send({status: "error", message: err.message});
+    }
+});
+
+router.get('/getPosts', async (req, res) => {
+    let course = req.query.course;
+    try {
+        let posts = await Post.find({courseID: course});
+        res.type("JSON");
+        res.send({posts: posts});
+    }catch (err) {
+        res.send({error: err});
+    }
+})
+
+// Retrieve a course with an ID
 router.get("/:courseId", async (req, res) => {
     const id = req.params.courseId;
-    let course = await req.db.User.findById(id)
-    res.json(course)
+    try {
+        let course = await Course.findById(id)
+        res.send(course)
+    } catch (error) {
+        res.send({ error: error.message })
+    }
 });
 
-// TODO: Delete a course with an ID
+// Delete a course with an ID
 router.delete("/:courseId", async (req, res) => {
     const id = req.params.courseId;
-    await req.db.Course.deleteOne({_id: id})
-    res.json({status: "success"})
-    // res.send("Delete course: " + id);
+    try {
+        await Course.deleteOne({_id: id})
+        res.send({status: "success"})
+    } catch (error) {
+        res.send({status: "error"})
+    }
 });
 
-// TODO: Create a course
+// Create a course
 router.post("/", async (req, res) => {
     const course = req.body;
-    let courseId = course.courseId
-    let title = course.title
-    let content = course.content
-
-    let newCourse = new req.db.Course({
-        courseId: courseId,
-        title: title,
-        content: content
-      })
-
-      await newCourse.save()
-  res.json({status: "success"})
+    try {
+        let newCourse = new Course(course);
+        await newCourse.save()
+        res.send({status: "success", course: newCourse})
+    } catch (error) {
+        res.send({status: "error"})
+    }
 });
+
+
 
 export default router;

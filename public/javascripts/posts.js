@@ -14,14 +14,15 @@ async function getRecentPosts() {
         const posts = await res.json();
         let postContainer = document.getElementById("recent-posts");
 
-        let savedPosts = posts.data.map(post => {
+        let savedPosts = posts.map(post => {
+            console.log(post);
             return `
                 <div class="default-post">
                     <h3 class="post-title">
                         ${post.title} <span class="post-course-code">${post.courseID.toUpperCase().replace(" ", "")}</span>
                     </h3>
                     <p class="post-content">${post.content}</p>
-                    <em class="post-details">Posted by User ${post.uid} at ${post.date}</em>
+                    <em class="post-details">Posted by User${post.uid} at ${post.created_date}</em>
                     <hr />
                 </div>
             `
