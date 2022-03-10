@@ -16,11 +16,10 @@ router.get("/", async (req, res) => {
             let accHash = SHA256.hex(req.session.account.username);
             let acct = await Account.findOne({emailHash: accHash});
             //replace role with prompt for user
-            let role = "student";
             if(!acct) {
                 let newAccount = new Account({
-                                            permission: "user",
-                                            role: role,
+                                            permissions: "user",
+                                            role: "student",
                                             emailHash: accHash
                                             });
                 await newAccount.save();
