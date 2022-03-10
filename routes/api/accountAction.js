@@ -19,9 +19,9 @@ router.put("/:accountId", async (req, res) => {
                 let reqAcct = await Account.findOne({_id: mongoose.Types.ObjectId(reqAccount)});
                 actions[action];
                 let actions = {
-                    BAN: () => {reqAcct.permission = "BANNED";},
-                    PROMOTE: () => {reqAcct.permission = "admin";},
-                    DEMOTE: () => {reqAcct.permission = "user";}
+                    BAN: () => {reqAcct.permissions = "BANNED";},
+                    PROMOTE: () => {reqAcct.permissions = "admin";},
+                    DEMOTE: () => {reqAcct.permissions = "user";}
                     }
                 await reqAccount.save();
             }catch (err) {
