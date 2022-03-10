@@ -28,7 +28,7 @@ router.get("/all", async (req, res) => {
         }
     }
     res.type("JSON");
-    res.send({Posts: top10Num});
+    res.send(top10Num);
 });
 
 export default router;
