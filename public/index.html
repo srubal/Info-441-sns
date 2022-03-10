@@ -9,9 +9,11 @@
       rel="stylesheet"
     />
     <script src="javascripts/index.js"></script>
+    <script src="javascripts/posts.js"></script>
+    <script src="javascripts/courses.js"></script>
   </head>
 
-  <body>
+  <body onload="init()">
     <header>
       <nav>
         <a role="link" onclick="showPage('home-page', 'all-courses')"> Home </a>
@@ -23,60 +25,27 @@
     </header>
 
     <section id="home-page">
-      <form class="post-form">
+      <div class="post-form">
         <h2>Create a Post</h2>
         <input id="create-title" type="text" placeholder="Title" />
         <input id="create-course" type="text" placeholder="Course Code" />
         <textarea id="create-post" placeholder="Write your post..."></textarea>
-        <button class="btn post-btn" type="submit" onsubmit="submitInfo()">
+        <button class="btn post-btn" onclick="createPost()">
           Post
         </button>
-      </form>
+      </div>
 
       <h2>Recent Posts</h2>
       <div id="recent-posts">
-        <div class="default-post">
-          <h3 class="post-title">
-            Post Title <span class="post-course-code">INFO 441</span>
-          </h3>
-          <p class="post-content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-          <em class="post-details"
-            >Posted by Anonymous at 2022-02-22T05:33:57.283Z</em
-          >
-          <hr />
-        </div>
-        <div class="default-post">
-          <h3 class="post-title">
-            Post Title <span class="post-course-code">INFO 441</span>
-          </h3>
-          <p class="post-content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-          <em class="post-details"
-            >Posted by Anonymous at 2022-02-22T05:33:57.283Z</em
-          >
-          <hr />
-        </div>
+
       </div>
     </section>
 
     <section id="all-courses" class="hidden">
       <h1>This is the courses page!</h1>
     </section>
+
+    <p id="error-msg"></p>
   </body>
   <script src="javascripts/identity.js"></script>
 </html>

@@ -134,3 +134,11 @@ hr {
 .hidden {
   display: none !important;
 }
+
+#error-msg {
+  position: fixed;
+  bottom: .8em;
+  right: 2.5em;
+  color: rgb(175, 15, 15);
+  font-weight: 600;
+}

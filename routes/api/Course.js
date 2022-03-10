@@ -15,7 +15,7 @@ router.get("/all", async (req, res) => {
 router.get('/getPosts', async (req, res) => {
     let course = req.query.course;
     try {
-        let posts = await Post.find({courseId: course});
+        let posts = await Post.find({courseID: course});
         res.type("JSON");
         res.send({posts: posts});
     }catch (err) {

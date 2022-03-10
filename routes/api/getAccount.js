@@ -16,7 +16,7 @@ router.get("/:accountId", async (req, res) => {
         let acct = await Account.findOne({emailHash: currAccHash});
         let reqAcct = await Account.findOne({_id: mongoose.Types.ObjectId(reqAccount)});
         if(reqAcct.emailHash == currAccHash || acct.permission == "admin") {
-            let posts = await Post.find({uid: reqAccount._id})
+            let posts = await Post.find({uid:reqAccount})
             console.log(reqAcct._id + " " + reqAcct.role);
             let retObj = {
                         uid: reqAcct._id,
@@ -24,8 +24,20 @@ router.get("/:accountId", async (req, res) => {
                         role: reqAcct.role,
                         posts: posts
             }
-            res.type("JSON");
-            res.send(retObj);
+            let allPosts = posts.map((post) => {
+                return `
+                <div class="default-post">
+                    <h3 class="post-title">
+                        ${post.title} <span class="post-course-code">${post.courseID.toUpperCase().replace(" ", "")}</span>
+                    </h3>
+                    <p class="post-content">${post.content}</p>
+                    <em class="post-details">Posted by User${post.uid} at ${post.created_date}</em>
+                    <hr />
+                </div>
+            `
+            })
+            res.type("HTML");            
+            res.send("<HTML><p><b>User ID: </b>" + retObj.uid + "</p><b>Role: </b>" + retObj.role + "<p></p>" + allPosts + "<HTML/>");
         }else {
             res.send({status:"error", error:"permission denied"});
         }

@@ -18,7 +18,7 @@ router.get("/:postId", async (req, res) => {
     } catch (error) {
         res.send({error: error.message});
     }
-    
+
 });
 
 // Like a post
@@ -86,8 +86,8 @@ router.post("/", async (req, res) => {
         if(acct && acct.permission != "BANNED") {
             let uid = acct._id;
             let today = new Date();
-            let date = Date.parse(today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear());
-            const escapeHTML = str => str.replace(/[&<>'"]/g, 
+            let date = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
+            const escapeHTML = str => str.replace(/[&<>'"]/g,
                                         tag => ({
                                             '&': '&amp;',
                                             '<': '&lt;',

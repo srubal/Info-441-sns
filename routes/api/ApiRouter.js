@@ -15,36 +15,31 @@ router.use('/p', postRouter);
 // also handles endpoint for search
 router.get("/all", async (req, res) => {
     try {
-    let cursor = Post.find().cursor();
-    let top10Num = [];
-    for(let post = await cursor.next(); post != null; post = await cursor.next()) {
-        let date = post.created_date;
-        // && date >= top10Num[0].created_date
-        if(top10Num.length < 10 ) {
-            if(top10Num.length > 0 && date >= top10Num[0].created_date) {
-                top10Num.unshift(post);
-            }else if (top10Num > 0) {
-                top10Num.push(post);
-            }else {
-                top10Num.push(post);
-            }
-        }else if(date >= top10Num[0].created_date) {
-            if(date >= top10Num[0].created_date) {
-                top10Num.unshift(post);
-            }else if (date >= top10Num[9].created_date) {
-                top10Num.pop();
-                top10Num.push(post);
-            }
-        }
-        if(top10Num.length > 10) {
-            top10Num.pop();
-        }
+        let posts = await Post.find();
+        posts = posts.sort((a, b) => (Date.parse(a.created_date) < Date.parse(b.created_date)) ? 1 : -1).slice(0, 10);
+        res.type("json")
+        res.send(posts);
+    } catch(err) {
+        res.send(err);
     }
-    res.type("JSON");
-    res.send({Posts: top10Num});
-    }catch (err) {
-        res.send({error: err});
-    }
+    // let cursor = Post.find().cursor();
+    // let top10Num = [];
+    // for(let post = await cursor.next(); post != null; post = await cursor.next()) {
+    //     let date = post.created_date;
+    //     if(top10Num.length != 0 && date >= top10Num[0].created_date) {
+    //         top10Num.unshift(post);
+    //     }else if(top10Num.length == 0) {
+    //         top10Num[0] = post;
+    //     }
+
+    //     if (top10Num.length > 10) {
+    //         top10Num.pop();
+    //     }
+    // }
+
+    // console.log(top10Num);
+    // res.type("JSON");
+    // res.send(top10Num);
 });
 
 export default router;
