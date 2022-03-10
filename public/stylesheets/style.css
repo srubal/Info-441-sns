@@ -114,6 +114,7 @@ h2 {
 #recent-posts span {
   display: inline-block;
   font-size: .65em;
+  letter-spacing: 1px;
   color: white;
   background-color: #6914d8;
   margin: .2em .6em;
@@ -139,6 +140,7 @@ hr {
 #courses-container div {
   font-size: 1em;
   font-weight: 600;
+  letter-spacing: 1px;
   margin: .6em .2em;
   margin-right: 1.2em;
   padding: .6em 1.2em;
