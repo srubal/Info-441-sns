@@ -15,7 +15,7 @@ async function getAllCourses() {
         let container = document.getElementById("courses-container");
         const coursesHTML = courses.map(c => {
             return `
-                <div class="default-course">
+                <div id=${c._id} class="default-course">
                     ${c.name}
                 </div>
             `

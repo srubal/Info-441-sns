@@ -49,11 +49,16 @@ router.delete("/:courseId", async (req, res) => {
 router.post("/", async (req, res) => {
     const course = req.body.course;
 
-    console.log("course " + course);
     try {
-        let newCourse = new Course({name: course});
-        await newCourse.save()
-        res.send({status: "success", course: newCourse})
+        let courseEntered = await Course.find({name: course});
+        // prevents duplicate courses
+        if (courseEntered.length == 0) {
+            let newCourse = new Course({name: course});
+            await newCourse.save()
+
+            courseEntered = newCourse;
+        }
+        res.send({status: "success", course: courseEntered})
     } catch (error) {
         res.send({status: "error"})
     }

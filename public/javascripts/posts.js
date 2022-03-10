@@ -138,6 +138,7 @@ async function createPost() {
 
             createCourse(courseID.toUpperCase().replace(" ", ""));
             await getRecentPosts();
+            await getAllCourses();
         } else {
             alert(response.error);
         }
