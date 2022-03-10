@@ -11,7 +11,7 @@ a {
 header {
   display: flex;
   justify-content: space-between;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 1px;
   margin-bottom: 4em;
 }
@@ -114,6 +114,7 @@ h2 {
 #recent-posts span {
   display: inline-block;
   font-size: .65em;
+  font-weight: 600;
   letter-spacing: 1px;
   color: white;
   background-color: #6914d8;
@@ -155,6 +156,10 @@ hr {
 
 .hidden {
   display: none !important;
+}
+
+.selected {
+  font-weight: 700;
 }
 
 #error-msg {

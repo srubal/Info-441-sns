@@ -2,12 +2,10 @@
   <head>
     <title>UW Course Review Forum</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <script src="javascripts/index.js"></script>
     <script src="javascripts/posts.js"></script>
     <script src="javascripts/courses.js"></script>
@@ -16,8 +14,8 @@
   <body onload="init()">
     <header>
       <nav>
-        <a role="link" onclick="showPage('home-page', 'all-courses')"> Home </a>
-        <a role="link" onclick="showPage('all-courses', 'home-page')">
+        <a id="home-tab" class="selected" role="link" onclick="showPage('home-page', 'all-courses', 'course-tab', 'home-tab')"> Home </a>
+        <a id="course-tab" role="link" onclick="showPage('all-courses', 'home-page', 'home-tab', 'course-tab')">
           All Courses
         </a>
       </nav>
