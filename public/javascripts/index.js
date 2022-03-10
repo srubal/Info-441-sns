@@ -1,6 +1,7 @@
 // function call when page is initialized
 async function init() {
     await getRecentPosts();
+    await getAllCourses();
 }
 
 function postSubmit() {

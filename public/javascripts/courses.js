@@ -11,6 +11,17 @@ async function getAllCourses() {
             }
         });
         const courses = await res.json();
+        console.log(JSON.stringify(courses))
+        let container = document.getElementById("courses-container");
+        const coursesHTML = courses.map(c => {
+            return `
+                <div class="default-course">
+                    ${c.name}
+                </div>
+            `
+        }).join("\n");
+        container.innerHTML = coursesHTML;
+
         return courses;
     }
     catch (error) {
@@ -59,7 +70,7 @@ async function createCourse(course) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(course)
+            body: JSON.stringify({course: course})
         });
         const newCourse = await res.json();
         return newCourse;

@@ -47,9 +47,11 @@ router.delete("/:courseId", async (req, res) => {
 
 // Create a course
 router.post("/", async (req, res) => {
-    const course = req.body;
+    const course = req.body.course;
+
+    console.log("course " + course);
     try {
-        let newCourse = new Course(course);
+        let newCourse = new Course({name: course});
         await newCourse.save()
         res.send({status: "success", course: newCourse})
     } catch (error) {

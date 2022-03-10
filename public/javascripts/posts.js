@@ -136,6 +136,7 @@ async function createPost() {
             document.getElementById("create-title").value = "";
             document.getElementById("create-post").value = "";
 
+            createCourse(courseID.toUpperCase().replace(" ", ""));
             await getRecentPosts();
         } else {
             alert(response.error);
