@@ -16,7 +16,7 @@ router.use('/p', postRouter);
 router.get("/all", async (req, res) => {
     try {
         let posts = await Post.find();
-        posts = posts.sort((a, b) => (a.created_date < b.created_date) ? 1 : -1).slice(0, 10);
+        posts = posts.sort((a, b) => (Date.parse(a.created_date) < Date.parse(b.created_date)) ? 1 : -1).slice(0, 10);
         res.type("json")
         res.send(posts);
     } catch(err) {
