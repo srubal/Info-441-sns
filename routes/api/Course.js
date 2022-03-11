@@ -5,7 +5,7 @@ var router = express.Router();
 // Retrieve all courses
 router.get("/all", async (req, res) => {
     try {
-        const courses = await Course.find({});
+        const courses = await Course.find();
         res.json(courses);
     } catch (err) {
         res.send({status: "error", message: err.message});
@@ -47,11 +47,18 @@ router.delete("/:courseId", async (req, res) => {
 
 // Create a course
 router.post("/", async (req, res) => {
-    const course = req.body;
+    const course = req.body.course;
+
     try {
-        let newCourse = new Course(course);
-        await newCourse.save()
-        res.send({status: "success", course: newCourse})
+        let courseEntered = await Course.find({name: course});
+        // prevents duplicate courses
+        if (courseEntered.length == 0) {
+            let newCourse = new Course({name: course});
+            await newCourse.save()
+
+            courseEntered = newCourse;
+        }
+        res.send({status: "success", course: courseEntered})
     } catch (error) {
         res.send({status: "error"})
     }

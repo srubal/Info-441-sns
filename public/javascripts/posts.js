@@ -19,7 +19,7 @@ async function getRecentPosts() {
             return `
                 <div class="default-post">
                     <h3 class="post-title">
-                        ${post.title} <span class="post-course-code">${post.courseID.toUpperCase().replace(" ", "")}</span>
+                        ${post.title} <span class="post-course-code">${post.courseID}</span>
                     </h3>
                     <p class="post-content">${post.content}</p>
                     <em class="post-details">Posted by User${post.uid} at ${post.created_date}</em>
@@ -118,7 +118,7 @@ async function createPost() {
         let courseID = document.getElementById("create-course").value;
         let postTitle = document.getElementById("create-title").value;
         let postContent = document.getElementById("create-post").value;
-        const postData = {courseID: courseID, title: postTitle, content: postContent};
+        const postData = {courseID: courseID.toUpperCase().replace(" ", ""), title: postTitle, content: postContent};
         const res = await fetch(endpoint, {
             method: 'POST',
             headers: {
@@ -136,7 +136,9 @@ async function createPost() {
             document.getElementById("create-title").value = "";
             document.getElementById("create-post").value = "";
 
+            createCourse(courseID.toUpperCase().replace(" ", ""));
             await getRecentPosts();
+            await getAllCourses();
         } else {
             alert(response.error);
         }
