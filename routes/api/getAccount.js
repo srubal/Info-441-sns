@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 var router = express.Router();
 
 
-// Get a user with an ID, or perform an action
+// Get a user with via uid only can be performed by the user or an admin
 router.get("/:accountId", async (req, res) => {
     if(req.session.isAuthenticated) {
         let currAccount = req.session.account.username;

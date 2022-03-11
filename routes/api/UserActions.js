@@ -8,7 +8,7 @@ var router = express.Router();
 
 router.use('/act', actRouter);
 router.use('/get', getRouter);
-//Creates account data by hashing their email, creating a unique anonymous identifier for them
+//Creates account data by hashing their email, creating a unique anonymous identifier for them, or gets their uid
 router.get("/", async (req, res) => {
     if(req.session.isAuthenticated && req.session.account.username.includes("@uw.edu")) {
         try {
@@ -34,6 +34,8 @@ router.get("/", async (req, res) => {
         res.redirect('/');
     }
 });
+
+//If this is their first time logging in this gets their uid from the DB if not it just returns it
 router.get('/getIdentity', async (req, res) => {
     if(req.session.isAuthenticated && !req.session.account.anonUid) {
         var SHA256 = new Hashes.SHA256;
