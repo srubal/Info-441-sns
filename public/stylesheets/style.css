@@ -103,17 +103,17 @@ h2 {
   margin: 2em 0;
 }
 
-#recent-posts h3, #recent-posts p, #recent-posts em {
-  margin: .6em .4em;
+.default-post h3, .default-post p, .default-post em {
+  margin: .2em .4em;
   line-height: 26px;
 }
 
-#recent-posts h3 {
-  line-height: 30px;
+.default-post h3 {
+  line-height: 28px;
   vertical-align: top;
 }
 
-#recent-posts span {
+.default-post span {
   display: inline-block;
   font-size: .65em;
   font-weight: 600;
@@ -125,10 +125,12 @@ h2 {
   border-radius: 20px;
 }
 
-#recent-posts em {
+.default-post em {
   color: rgb(98, 98, 98);
   display: block;
-  margin-top: 1.2em;
+  margin-top: 1.6em;
+  font-size: .9em;
+  letter-spacing: 1px;
 }
 
 hr {
@@ -156,12 +158,24 @@ hr {
   cursor: pointer;
 }
 
+#course-posts-container {
+  margin-top: 4.2em;
+}
+
 .hidden {
   display: none !important;
 }
 
 .selected {
   font-weight: 700;
+}
+
+.instruction {
+  color: rgb(98, 98, 98);
+  margin-top: -.6em;
+  margin-bottom: 1.2em;
+  font-size: 1em;
+  letter-spacing: 1px;
 }
 
 #error-msg {

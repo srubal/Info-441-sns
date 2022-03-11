@@ -4,10 +4,6 @@ async function init() {
     await getAllCourses();
 }
 
-function postSubmit() {
-    createPost();
-}
-
 // Allows user to switch between pages on the navbar (Home & All Courses)
 function showPage(newPage, oldPage, otherTabId, thisTabId) {
     let show = document.getElementById(newPage);

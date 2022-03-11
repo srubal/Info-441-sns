@@ -29,7 +29,7 @@
         <input id="create-title" type="text" placeholder="Title" />
         <input id="create-course" type="text" placeholder="Course Code" />
         <textarea id="create-post" placeholder="Write your post..."></textarea>
-        <button class="btn post-btn" onclick="postSubmit()">
+        <button class="btn post-btn" onclick="createPost()">
           Post
         </button>
       </div>
@@ -42,9 +42,11 @@
 
     <section id="all-courses" class="hidden">
       <h2>All UW Courses</h2>
+      <p class="instruction">Click on a course to view all relevant posts</p>
       <div id="courses-container">
 
       </div>
+      <div id="course-posts-container"></div>
     </section>
     <footer>Built by Alan Wen, Arjun Aggarwal, Audrey Kho, Stephen Rubalcava</footer>
   </body>

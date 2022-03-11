@@ -15,7 +15,7 @@ async function getAllCourses() {
         let container = document.getElementById("courses-container");
         const coursesHTML = courses.map(c => {
             return `
-                <div id=${c._id} class="default-course">
+                <div id=${c._id} class="default-course" onclick="getPosts('${c._id}')">
                     ${c.name}
                 </div>
             `
@@ -83,16 +83,36 @@ async function createCourse(course) {
 // Retrieves posts from a given Course
 async function getPosts(courseId) {
     try {
-        const res = await fetch(coursesEndpoint + '/getposts?course=' + id, {
+        const courseCode = await getCourse(courseId);
+        const res = await fetch(coursesEndpoint + '/getPosts?course=' + courseCode.name, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         });
         const posts = await res.json();
+
+        let coursePosts = posts.posts.map(post => {
+            return `
+            <div class="default-post">
+                <h3 class="post-title">
+                    ${post.title}
+                </h3>
+                <p class="post-content">${post.content}</p>
+                <em class="post-details">Posted by User${post.uid} at ${post.created_date}</em>
+                <hr />
+            </div>
+            `
+        }).join("\n");
+
+        document.getElementById("course-posts-container").innerHTML = `
+            <h2>All Posts for ${courseCode.name}</h2>
+            ${coursePosts}
+        `;
+
         return posts;
     } catch (error) {
-        console.log("Error searching for posts: " + error);
+        console.log("Error retrieving posts for this course: " + error);
         return undefined;
     }
 }
